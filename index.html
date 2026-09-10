@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Clara by Claritel | AI Voice, Chat and Conversation Quality</title>
   <meta name="description" content="Clara connects voice, WhatsApp, web chat and quality analysis to the business metrics your team owns. Build, test and deploy from one platform." />
-  <meta name="theme-color" content="#1B1B3C" />
+  <meta name="theme-color" content="#0B0B18" />
   <script>document.documentElement.className += " js";</script>
   <meta property="og:title" content="Clara by Claritel | AI Voice, Chat and Conversation Quality" />
   <meta property="og:description" content="AI that becomes part of how your business performs. Voice, WhatsApp, web chat and conversation quality — connected to the outcomes your team measures." />
@@ -57,7 +57,7 @@
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <span class="eyebrow eyebrow--dark">Voice · WhatsApp · Web chat · Quality</span>
-      <h1 class="h-xl hero__title">AI that becomes part of how your business performs.</h1>
+      <h1 class="h-xl hero__title">AI that becomes <span class="grad">part of how your business performs.</span></h1>
       <p class="hero__sub">Clara handles customer conversations across phone, WhatsApp and the web—then connects every interaction to the outcomes your team measures. We help you design the workflow, deploy the agent and improve it with real customer data.</p>
       <div class="hero__cta">
         <a class="btn btn--light btn--lg" href="#hero-demo">Talk to Clara now</a>
@@ -72,8 +72,8 @@
     <!-- Interactive demo -->
     <div class="demo" id="hero-demo" aria-label="Live agent demo">
       <div class="demo__head">
-        <span class="demo__label">Live demo · Clara Voice</span>
-        <span class="demo__label" style="opacity:.7">In-browser</span>
+        <span class="demo__label demo__label--live"><span class="dot"></span>Live demo · Clara Voice</span>
+        <span class="demo__label" style="opacity:.7">In-browser · no signup</span>
       </div>
       <p class="demo__prompt">Choose a conversation. See what Clara can do.</p>
 
@@ -112,6 +112,7 @@
             </button>
             <button class="btn btn--outline-light" id="sampleBtn" hidden>Hear a sample conversation</button>
           </div>
+          <p class="demo__note" id="demoNote" role="status"></p>
         </div>
 
         <!-- Call interface (inline, not modal) -->
@@ -134,13 +135,13 @@
                 </button>
               </div>
             </div>
-            <div class="transcript" id="transcript" aria-live="polite" aria-label="Live transcript"></div>
+            <div class="transcript" id="transcript" aria-live="polite" aria-label="Live transcript"><p class="transcript__empty">Transcript appears here as the conversation runs.</p></div>
           </div>
         </div>
 
         <!-- Post-call actions -->
         <div class="post-call" id="postCall">
-          <span class="post-call__label">Call ended. What next?</span>
+          <span class="post-call__label" id="postCallLabel" role="status"></span>
           <button class="btn btn--light btn--sm" id="tryAnother">Try another scenario</button>
           <a class="btn btn--outline-light btn--sm" href="#final">Build one for my business</a>
         </div>

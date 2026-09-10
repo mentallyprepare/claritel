@@ -25,9 +25,20 @@ python3 -m http.server 8000
 
 ## Design system
 
-- **Palette:** navy `#1B1B3C` · purple `#534B82` · lavender `#E6E6FF` · off-white `#FCFCFD` · ink `#181A1B` · muted `#61676B`
-- **Type:** Roboto
-- **Clara mark:** an abstract metallic orb (CSS `.orb`) with `idle`, `listening`, `thinking`, `speaking`, `muted`, `ended` states — no face/avatar.
+Dark, demo-forward aesthetic — the immediacy of a product-led voice-AI site,
+built on Clara's own brand colours (not a Vapi copy: no green-on-black, no
+borrowed layout/wording/marks).
+
+- **Base:** near-black navy `#0B0B18` with soft purple atmospheric glows.
+- **Brand palette:** navy `#1B1B3C` · purple `#534B82` · lavender `#E6E6FF`;
+  luminous lavender is the primary CTA, a mint `#5FE3B0` marks "live/listening".
+- **Text:** near-white `#F4F4FB` / muted `#9C9CC0` on dark.
+- **Product UIs & diagrams** are rendered as bright "screenshot" panels on the
+  dark canvas for contrast.
+- **Type:** Roboto.
+- **Clara mark:** an abstract metallic orb (CSS `.orb`) that glows on the dark
+  ground, with `idle`, `listening`, `thinking`, `speaking`, `muted`, `ended`
+  states — no face/avatar.
 
 ## Interactive pieces
 

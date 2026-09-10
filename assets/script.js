@@ -66,13 +66,23 @@
   // Mark a few lens bars "hot" near the flagged evidence region
   lensBars.forEach(function (b, i) { if (i > 40 && i < 50) b.classList.add("hot"); });
 
-  var waveTimer = null;
-  function animateWaves() {
-    if (prefersReduced) return;
-    voiceBars.forEach(function (b) { b.style.height = (6 + Math.random() * 28) + "px"; });
-    waveTimer = window.setTimeout(animateWaves, 180);
+  // Animate the decorative voice waveform only while it is on screen.
+  function makeWaveAnimator(bars, interval, fn) {
+    var timer = null;
+    return {
+      start: function () { if (timer || prefersReduced) return; timer = window.setInterval(fn, interval); },
+      stop: function () { if (timer) { clearInterval(timer); timer = null; } }
+    };
   }
-  if (!prefersReduced) animateWaves();
+  var voiceWaveAnim = makeWaveAnimator(voiceBars, 180, function () {
+    voiceBars.forEach(function (b) { b.style.height = (6 + Math.random() * 28) + "px"; });
+  });
+  if (!prefersReduced && "IntersectionObserver" in window && $("#voiceWave")) {
+    var voiceIo = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) voiceWaveAnim.start(); else voiceWaveAnim.stop(); });
+    }, { threshold: 0.1 });
+    voiceIo.observe($("#voiceWave"));
+  }
 
   /* ===================================================================
      HERO VOICE DEMO
@@ -169,14 +179,20 @@
   });
 
   /* ---- Call state machine ---- */
-  var callState_ = { timer: null, seconds: 0, stream: null, audioCtx: null, raf: null, playTimers: [], live: false, muted: false };
+  var callState_ = { timer: null, seconds: 0, stream: null, audioCtx: null, raf: null, playTimers: [], live: false, muted: false, starting: false };
   var STATE_LABEL = { listening: "Listening", thinking: "Thinking", speaking: "Speaking", muted: "Muted", ended: "Call ended" };
+  var demoNote = $("#demoNote");
+  var postCallLabel = $("#postCallLabel");
 
   function setState(state) {
     var label = state === "muted" ? "Muted" : STATE_LABEL[state] || state;
     callState.setAttribute("data-state", state);
     callStateText.textContent = label;
     callOrb.setAttribute("data-state", state);
+    // Clear any inline transform from the mic-driven visual so CSS state
+    // animations (thinking/speaking) show instead of a frozen listening frame.
+    var core = $(".orb__core", callOrb);
+    if (core) core.style.transform = "";
   }
 
   function fmt(s) {
@@ -280,6 +296,7 @@
   }
 
   function openCallUI() {
+    callState_.starting = false;
     callState_.live = true;
     callState_.muted = false;
     transcript.innerHTML = "";
@@ -287,13 +304,24 @@
     postCall.classList.remove("is-shown");
     callUI.classList.add("is-live");
     muteBtn.setAttribute("aria-pressed", "false");
+    muteBtn.setAttribute("aria-label", "Mute microphone");
     setState("listening");
     startTimer();
     playConversation();
     endBtn.focus();
   }
 
+  // Mic denied / unavailable: don't auto-start. Surface the sample fallback.
+  function showSampleFallback(msg) {
+    callState_.starting = false;
+    sampleBtn.hidden = false;
+    if (demoNote) { demoNote.textContent = msg; demoNote.classList.add("is-shown"); }
+    sampleBtn.focus();
+  }
+
   function beginCall() {
+    if (callState_.starting || callState_.live) return; // re-entrancy guard
+    callState_.starting = true;
     // Ask for mic ONLY after explicit click
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ audio: true }).then(function (stream) {
@@ -301,13 +329,10 @@
         openCallUI();
         startMicVisual(stream);
       }).catch(function () {
-        // Denied / unavailable → offer sample fallback, still allow simulated call
-        sampleBtn.hidden = false;
-        openCallUI();
+        showSampleFallback("Microphone unavailable. You can hear a sample conversation instead.");
       });
     } else {
-      sampleBtn.hidden = false;
-      openCallUI();
+      showSampleFallback("Live calling isn't available in this browser. Hear a sample conversation instead.");
     }
   }
 
@@ -326,12 +351,20 @@
 
   function endCall(userEnded) {
     callState_.live = false;
+    callState_.starting = false;
     clearAllTimers();
     stopMic();
     setState("ended");
     callUI.classList.remove("is-live");
     postCall.classList.add("is-shown");
-    if (userEnded) { try { $("#tryAnother").focus(); } catch (e) {} }
+    // Announce + move focus on BOTH natural and user-triggered ends,
+    // since the focused end-button is inside the now-hidden call region.
+    if (postCallLabel) {
+      postCallLabel.textContent = userEnded
+        ? "Call ended. Try another scenario, or build one for your business."
+        : "The sample call finished. Try another scenario, or build one for your business.";
+    }
+    try { $("#tryAnother").focus(); } catch (e) {}
   }
 
   if (startCall) startCall.addEventListener("click", beginCall);
@@ -346,15 +379,21 @@
 
   if (endBtn) endBtn.addEventListener("click", function () { endCall(true); });
 
-  if (sampleBtn) sampleBtn.addEventListener("click", function () {
-    // Fallback: play sample without requiring mic
+  function resetFallback() {
     sampleBtn.hidden = true;
+    if (demoNote) { demoNote.textContent = ""; demoNote.classList.remove("is-shown"); }
+  }
+
+  if (sampleBtn) sampleBtn.addEventListener("click", function () {
+    // Fallback: play the sample without requiring mic
+    resetFallback();
     openCallUI();
   });
 
   var tryAnother = $("#tryAnother");
   if (tryAnother) tryAnother.addEventListener("click", function () {
     postCall.classList.remove("is-shown");
+    resetFallback();
     preCall.hidden = false;
     setState("listening");
     // focus scenario chips so the visitor can pick a new one
