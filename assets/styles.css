@@ -520,7 +520,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 
 /* ---------- Footer ---------- */
 .footer { background: #08081400; background-color: #090914; color: #b6b6d4; padding-block: 60px 34px; border-top: 1px solid var(--line); }
-.footer__top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 36px; }
+.footer__top { display: grid; grid-template-columns: 1.3fr 2.6fr; gap: 48px; align-items: start; }
 .footer__brand p { font-size: 13.5px; color: #9c9cc0; max-width: 34ch; margin-top: 14px; }
 .footer h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: #7f7fa5; margin-bottom: 14px; }
 .footer li { margin-bottom: 9px; }
@@ -528,7 +528,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 .footer li a:hover { color: #fff; }
 .footer__bottom { display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; margin-top: 46px; padding-top: 22px; border-top: 1px solid var(--line); font-size: 12.5px; color: #7f7fa5; }
 .footer__legal { display: flex; flex-wrap: wrap; gap: 16px; }
-.footer__cols-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.footer__cols-wrap { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px 28px; }
 
 /* ---------- Animations ---------- */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
