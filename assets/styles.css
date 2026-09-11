@@ -160,10 +160,10 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 .nav__toggle { display: none; }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; overflow: clip; }
-.hero::before {
-  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background: radial-gradient(680px 380px at 72% 46%, rgba(139,129,214,.14), transparent 68%);
+.hero { position: relative; overflow: clip; background: #090914; }
+.hero__bg {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  pointer-events: none; display: block;
 }
 .hero__grid {
   position: relative; z-index: 1;
