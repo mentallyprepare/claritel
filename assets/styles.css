@@ -2,7 +2,7 @@
    Clara by Claritel — Homepage (dark, demo-forward)
    Palette: navy #1B1B3C · purple #534B82 · lavender #E6E6FF
             near-black base · luminous lavender accents
-   Type: Roboto
+   Type: Inter + JetBrains Mono
    ========================================================================= */
 
 /* ---------- Tokens (dark) ---------- */
@@ -369,7 +369,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 .metric-arrow { color: var(--lavender); }
 .metric-arrow svg { width: 42px; height: 42px; }
 .metric-bar { height: 12px; border-radius: 999px; background: rgba(255,255,255,.12); overflow: hidden; }
-.metric-bar > span { display: block; height: 100%; width: 16%; border-radius: 999px; background: linear-gradient(90deg, var(--lavender), var(--live)); box-shadow: 0 0 20px rgba(95,227,176,.5); }
+.metric-bar > span { display: block; height: 100%; width: 80%; border-radius: 999px; background: linear-gradient(90deg, var(--lavender), var(--live)); box-shadow: 0 0 20px rgba(95,227,176,.5); transition: width 1.1s var(--ease); }
 .metric-scale { display: flex; justify-content: space-between; font-size: 12px; color: #c3c3dc; margin-top: 8px; }
 .metric-caption { margin-top: 22px; font-size: 13px; color: #d5d5ea; }
 

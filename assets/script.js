@@ -158,9 +158,7 @@
     agentName.textContent = s.name;
     agentIntro.textContent = s.intro;
     chips.forEach(function (c) {
-      var on = c.getAttribute("data-scn") === key;
-      c.setAttribute("aria-pressed", String(on));
-      c.setAttribute("aria-selected", String(on));
+      c.setAttribute("aria-pressed", String(c.getAttribute("data-scn") === key));
     });
   }
 
@@ -407,7 +405,11 @@
   var tlTabs = $$(".tl-tab", $("#tlTabs"));
   var tlPanels = $$(".tl-panel", $("#tlPanels"));
   function selectStep(i) {
-    tlTabs.forEach(function (t, idx) { t.setAttribute("aria-selected", String(idx === i)); });
+    tlTabs.forEach(function (t, idx) {
+      var on = idx === i;
+      t.setAttribute("aria-selected", String(on));
+      t.setAttribute("tabindex", on ? "0" : "-1"); // roving tabindex
+    });
     tlPanels.forEach(function (p, idx) { p.classList.toggle("is-active", idx === i); });
   }
   tlTabs.forEach(function (t, i) {
@@ -416,7 +418,7 @@
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         e.preventDefault();
         var next = e.key === "ArrowRight" ? (i + 1) % tlTabs.length : (i - 1 + tlTabs.length) % tlTabs.length;
-        tlTabs[next].focus(); selectStep(next);
+        selectStep(next); tlTabs[next].focus();
       }
     });
   });
@@ -490,6 +492,26 @@
     if (lw) lensIo.observe(lw);
   }
 
+  // Animate the outcome metric bar to its true fill (data-grow % of the 0–20% track)
+  var metricFill = document.querySelector(".metric-bar > span[data-grow]");
+  if (metricFill) {
+    var fillTarget = metricFill.getAttribute("data-grow") + "%";
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      metricFill.style.width = fillTarget;
+    } else {
+      metricFill.style.width = "0%";
+      var mio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { metricFill.style.width = fillTarget; mio.unobserve(e.target); }
+        });
+      }, { threshold: 0.4 });
+      mio.observe(metricFill);
+    }
+  }
+
   // Init
   selectScenario("sales");
+
+  // Signals to the inline fallback that full init completed (so it won't force-reveal).
+  window.__claraReady = true;
 })();
