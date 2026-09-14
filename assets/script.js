@@ -7,7 +7,7 @@
    - ClaraLens: evidence highlighting, override, audit trail
    - Decorative waveforms (respect reduced motion)
    ========================================================================= */
-(function () {
+function claraInit() {
   "use strict";
 
   var prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -492,26 +492,35 @@
     if (lw) lensIo.observe(lw);
   }
 
-  // Animate the outcome metric bar to its true fill (data-grow % of the 0–20% track)
-  var metricFill = document.querySelector(".metric-bar > span[data-grow]");
-  if (metricFill) {
-    var fillTarget = metricFill.getAttribute("data-grow") + "%";
+  // Animate any result/metric bars to their true fill (data-grow % of the track)
+  var growFills = document.querySelectorAll("[data-grow]");
+  growFills.forEach(function (fill) {
+    var fillTarget = fill.getAttribute("data-grow") + "%";
     if (prefersReduced || !("IntersectionObserver" in window)) {
-      metricFill.style.width = fillTarget;
+      fill.style.width = fillTarget;
     } else {
-      metricFill.style.width = "0%";
+      fill.style.width = "0%";
       var mio = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) { metricFill.style.width = fillTarget; mio.unobserve(e.target); }
+          if (e.isIntersecting) { fill.style.width = fillTarget; mio.unobserve(e.target); }
         });
       }, { threshold: 0.4 });
-      mio.observe(metricFill);
+      mio.observe(fill);
     }
-  }
+  });
 
   // Init
   selectScenario("sales");
 
   // Signals to the inline fallback that full init completed (so it won't force-reveal).
   window.__claraReady = true;
-})();
+}
+
+// Run after the DOM is parsed. External end-of-body scripts already satisfy this,
+// but when inlined into a single-file bundle the script can execute before later
+// markup exists — so defer to DOMContentLoaded when the document is still loading.
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", claraInit);
+} else {
+  claraInit();
+}
