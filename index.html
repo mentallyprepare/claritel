@@ -74,6 +74,7 @@
     <rect width="1440" height="780" fill="url(#heroVign)"/>
     <rect width="1440" height="780" filter="url(#heroGrain)" opacity="0.04"/>
   </svg>
+  <div class="hero__orb" aria-hidden="true"></div>
   <div class="wrap hero__grid">
     <div class="hero__copy">
       <span class="eyebrow eyebrow--dark">Voice · WhatsApp · Web chat · Quality</span>
@@ -359,28 +360,34 @@
 <!-- ===================== OPERATIONAL IMPACT ===================== -->
 <section class="section" style="background:var(--surface);border-block:1px solid var(--line)">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="eyebrow">What changes in practice</span>
-      <h2 class="h-lg">More capacity for the work that needs people.</h2>
-    </div>
-    <div class="impact-grid">
-      <article class="impact-card reveal">
-        <div class="impact-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+    <div class="bento">
+      <article class="bento-tile bento__feature reveal">
+        <div>
+          <span class="eyebrow">What changes in practice</span>
+          <h3 class="h-md">More capacity for the work that <span class="em">needs people.</span></h3>
+          <p>Clara absorbs the repetitive volume so your team spends its hours where judgment, empathy and expert decisions actually move the outcome.</p>
+        </div>
+        <div class="orb" data-state="idle" aria-hidden="true">
+          <span class="orb__pulse"></span><span class="orb__ring"></span><span class="orb__ring orb__ring--2"></span><span class="orb__ring orb__ring--3"></span><span class="orb__core"></span>
+        </div>
+      </article>
+      <article class="bento-tile reveal">
+        <div class="bento-tile__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
         <h3>Available beyond the shift</h3>
         <p>Routine requests, follow-ups and qualification can continue outside staffed hours, while escalation rules protect the conversations that require a person.</p>
       </article>
-      <article class="impact-card reveal">
-        <div class="impact-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+      <article class="bento-tile reveal">
+        <div class="bento-tile__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
         <h3>Volume without a larger queue</h3>
         <p>Run concurrent inbound and outbound conversations within account and campaign controls. Add capacity without adding desks, diallers or layers of supervision.</p>
       </article>
-      <article class="impact-card reveal">
-        <div class="impact-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0M16 3.5a3 3 0 010 5.5M18 20a6 6 0 00-3-5.2"/></svg></div>
+      <article class="bento-tile reveal">
+        <div class="bento-tile__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0M16 3.5a3 3 0 010 5.5M18 20a6 6 0 00-3-5.2"/></svg></div>
         <h3>Better use of human attention</h3>
         <p>Clara filters intent, gathers context and completes repeatable tasks before handing over. Human agents begin with the customer's history and the reason they need help.</p>
       </article>
-      <article class="impact-card reveal">
-        <div class="impact-card__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <article class="bento-tile reveal">
+        <div class="bento-tile__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
         <h3>Consistency that can be audited</h3>
         <p>Use the same knowledge, disclosures, workflows and quality criteria across every interaction. Review exceptions and evidence instead of relying on a small sample.</p>
       </article>
