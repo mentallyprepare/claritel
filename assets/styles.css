@@ -94,6 +94,36 @@ ul { margin: 0; padding: 0; list-style: none; }
 .section { padding-block: 120px; position: relative; }
 .section--tight { padding-block: 60px; }
 
+/* ---------- Light sections (Attio/Stripe light↔dark rhythm) ---------- */
+/* Flip the token palette in-scope so var()-based components adapt; a few
+   hardcoded whites are overridden explicitly below. */
+.sec-light {
+  --ink: #16181d;
+  --muted: #565b66;
+  --faint: #7c828d;
+  --line: rgba(20,22,30,.10);
+  --line-strong: rgba(20,22,30,.16);
+  --surface: #ffffff;
+  --surface-2: #f5f4f9;
+  --surface-3: #e9e8f0;
+  --lavender-dim: #6a5fae;
+  background: #F3F2F7;
+  color: #16181d;
+  border-block: 1px solid rgba(20,22,30,.07);
+}
+.sec-light h2, .sec-light h3, .sec-light h4,
+.sec-light .sec-head h2, .sec-light .product h3,
+.sec-light .cat-card h3, .sec-light .hero__title { color: #16181d; }
+.sec-light .eyebrow { color: #6a5fae; }
+.sec-light .lead, .sec-light .product__desc, .sec-light p { color: #565b66; }
+.sec-light .feat li { color: #33373f; }
+.sec-light .mock { border-color: rgba(20,22,30,.09); }
+.sec-light .int-col { box-shadow: 0 1px 2px rgba(20,22,30,.05); }
+.sec-light .int-item { color: #3a3e47; }
+.sec-light .int-item > span:first-child { color: #16181d; }
+.sec-light .int-badge--api { background: rgba(83,75,130,.12); color: #5b4fa0; }
+.sec-light .int-badge--native { background: rgba(28,122,73,.12); color: #1c7a49; }
+
 .eyebrow {
   display: inline-block;
   font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase;
