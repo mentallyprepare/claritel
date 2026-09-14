@@ -239,6 +239,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 .hero__cta { display: flex; flex-wrap: wrap; gap: 14px; margin: 38px 0 18px; }
 .hero__support { display: inline-flex; align-items: center; gap: 8px; color: #a3a3c6; font-size: 14px; }
 .hero__support svg { width: 16px; height: 16px; flex: none; color: var(--live); }
+/* Compliance trust line under the hero CTAs (brief 01) */
+.hero__trust { margin-top: 22px; font-size: 12.5px; letter-spacing: .01em; color: #8f8fb2; line-height: 1.7; max-width: 46ch; }
 
 /* ---------- Demo (hero) ---------- */
 .demo {

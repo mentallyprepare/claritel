@@ -89,7 +89,7 @@ function claraInit() {
      =================================================================== */
   var scenarios = {
     sales: {
-      name: "Clara · Sales qualification",
+      name: "Clara · Sales — outbound",
       intro: "“Hi, I'm Clara. I can walk you through the plans and check if we're a fit for your team. What are you hoping to solve?”",
       script: [
         { who: "clara", text: "Hi, thanks for taking a moment. I'm Clara. What are you hoping to improve right now?" },
@@ -100,7 +100,7 @@ function claraInit() {
       ]
     },
     support: {
-      name: "Clara · Customer support",
+      name: "Clara · Customer support — inbound",
       intro: "“Hi, I'm Clara from support. Tell me what's happening and I'll sort it or bring in a colleague with full context.”",
       script: [
         { who: "clara", text: "Hi, I'm Clara from support. What can I help you with today?" },
