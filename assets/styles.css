@@ -5,34 +5,34 @@
    Type: Inter + JetBrains Mono
    ========================================================================= */
 
-/* ---------- Tokens (dark) ---------- */
+/* ---------- Tokens — Claritel Design System v1.0 (dark mode) ---------- */
 :root {
-  --navy: #1B1B3C;
-  --purple: #534B82;
-  --purple-lit: #8b81d6;      /* brighter purple for dark bg */
-  --lavender: #E6E6FF;
-  --lavender-dim: #b9b6e6;
-  --live: #5FE3B0;            /* "live/listening" accent */
+  --navy: #1B1B3C;           /* brand/5 */
+  --purple: #7168A5;         /* brand-secondary/50 — accent on dark */
+  --purple-lit: #9393E7;     /* brand/30 — brighter accent */
+  --lavender: #E6E6FF;       /* brand/90 */
+  --lavender-dim: #ADA5E1;   /* brand-secondary/80 */
+  --live: #80D997;           /* success/green (dark) — "live/listening" */
 
-  --bg: #0A0A0D;             /* warm near-black base */
-  --bg-2: #0f0f13;
-  --surface: #16161c;        /* elevated section / card */
-  --surface-2: #1d1d24;
-  --surface-3: #26262f;
+  --bg: #0C0D0D;             /* surface-background (dark) neutral/5 */
+  --bg-2: #131414;
+  --surface: #181A1B;        /* surface-primary (dark) neutral/10 */
+  --surface-2: #27292B;      /* surface-secondary (dark) neutral/15 */
+  --surface-3: #3D4143;      /* surface-disabled (dark) neutral/25 */
 
-  --ink: #F3F1EA;            /* warm ivory primary text */
-  --muted: #A29E97;          /* warm secondary text */
-  --faint: #6d6a63;
+  --ink: #F2F2F3;            /* content-primary (dark) neutral/95 */
+  --muted: #AFB3B6;          /* content-secondary (dark) neutral/70 */
+  --faint: #7E8385;
 
-  --line: rgba(230,230,255,.10);
-  --line-strong: rgba(230,230,255,.18);
+  --line: rgba(255,255,255,.13);   /* border-subdued/divider (dark) */
+  --line-strong: rgba(255,255,255,.22);
 
-  --glow: 0 0 60px rgba(139,129,214,.35);
+  --glow: 0 0 60px rgba(113,104,165,.4);
 
-  --radius-sm: 10px;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 34px;
+  --radius-sm: 8px;          /* radius-xs / button */
+  --radius: 16px;            /* radius-sm */
+  --radius-lg: 24px;         /* radius-md */
+  --radius-xl: 32px;         /* radius-lg */
 
   --shadow-sm: 0 1px 2px rgba(0,0,0,.4);
   --shadow: 0 18px 44px rgba(0,0,0,.5);
@@ -42,8 +42,8 @@
   --ease: cubic-bezier(.22,.61,.36,1);
   --dur: 380ms;
 
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --display: "Fraunces", "Times New Roman", Georgia, serif;
+  --font: "Roboto", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --display: "Instrument Serif", "Times New Roman", Georgia, serif;
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
   color-scheme: dark;
@@ -67,7 +67,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4 { font-family: var(--display); line-height: 1.06; letter-spacing: -0.01em; margin: 0; font-weight: 400; text-wrap: balance; font-optical-sizing: auto; }
+h1, h2, h3, h4 { font-family: var(--font); line-height: 1.08; letter-spacing: -0.02em; margin: 0; font-weight: 700; text-wrap: balance; }
+/* Editorial emphasis — serif italic phrase inside a sans headline (Marklab-style) */
+.em { font-family: var(--display); font-style: italic; font-weight: 400; letter-spacing: 0; }
+.h-xl .em, .h-lg .em { font-size: 1.14em; line-height: 0.9; }
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 img, svg { max-width: 100%; display: block; }
@@ -85,9 +88,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .eyebrow--dark { color: var(--lavender-dim); }
 
-.h-xl { font-size: clamp(2.6rem, 4.6vw, 4.1rem); letter-spacing: -0.015em; font-weight: 400; line-height: 1.06; }
-.h-lg { font-size: clamp(2rem, 3.2vw, 2.9rem); letter-spacing: -0.012em; font-weight: 400; }
-.h-md { font-size: clamp(1.45rem, 2.2vw, 1.85rem); font-weight: 500; }
+.h-xl { font-size: clamp(2.5rem, 4.6vw, 4rem); letter-spacing: -0.03em; font-weight: 800; line-height: 1.04; }
+.h-lg { font-size: clamp(1.9rem, 3.2vw, 2.8rem); letter-spacing: -0.025em; font-weight: 700; }
+.h-md { font-size: clamp(1.4rem, 2.2vw, 1.75rem); font-weight: 700; }
 
 .lead { font-size: clamp(1.05rem, 1.4vw, 1.24rem); color: var(--muted); max-width: 62ch; }
 .muted { color: var(--muted); }
@@ -140,14 +143,18 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 
 /* ---------- Navigation ---------- */
 .nav {
-  position: sticky; top: 0; z-index: 60;
-  background: rgba(11,11,24,.72);
-  backdrop-filter: saturate(160%) blur(16px);
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+  position: sticky; top: 14px; z-index: 60; background: transparent;
+  padding-inline: 24px; margin-top: 14px;
 }
-.nav.is-stuck { border-bottom-color: var(--line); background: rgba(11,11,24,.86); }
-.nav__inner { display: flex; align-items: center; gap: 20px; height: 70px; }
+.nav__inner {
+  display: flex; align-items: center; gap: 20px; height: 58px;
+  max-width: 1120px; margin-inline: auto; padding: 0 10px 0 22px;
+  border-radius: 500px; border: 1px solid var(--line);
+  background: rgba(24,26,27,.72); backdrop-filter: saturate(160%) blur(18px);
+  box-shadow: 0 10px 34px rgba(0,0,0,.4);
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.nav.is-stuck .nav__inner { background: rgba(20,22,23,.9); }
 .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 700; font-size: 17px; letter-spacing: -.01em; color: var(--ink); }
 .brand__mark { width: 30px; height: 30px; flex: none; filter: drop-shadow(0 0 10px rgba(139,129,214,.5)); }
 .brand small { display: block; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .02em; margin-top: -2px; }
@@ -161,12 +168,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible,
 .nav__toggle { display: none; }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; overflow: clip; background: #0A0A0D; }
+.hero { position: relative; overflow: clip; background: #0C0D0D; }
 .hero__bg {
   position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
-  pointer-events: none; display: block; opacity: 0.5;
+  pointer-events: none; display: block;
 }
-.hero__bg::after { content: ""; }
 .hero__grid {
   position: relative; z-index: 1;
   display: grid; grid-template-columns: 1.02fr 1fr; gap: 60px; align-items: center;
